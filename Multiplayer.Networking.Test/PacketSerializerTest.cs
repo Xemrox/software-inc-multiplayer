@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MessagePack;
-using Multiplayer.Networking.Packet;
+using Packets;
 using Multiplayer.Networking.Utility;
 using Xunit;
 using Xunit.Abstractions;
@@ -38,30 +38,14 @@ namespace Multiplayer.Networking.Test
             var packet = new Handshake("test");
 
             var serializedPacket = this.packetSerializer.SerializePacket(packet);
-            Assert.NotNull(serializedPacket);
-            Assert.NotEmpty(serializedPacket);
-
-            var deserializedPacket = this.packetSerializer.DeserializePacket(serializedPacket);
-            var deserializedTypedPacket = deserializedPacket as Handshake;
-            Assert.NotNull(deserializedPacket);
-            Assert.NotNull(deserializedTypedPacket);
-
-            Assert.Equal(packet.UserId, deserializedTypedPacket.UserId);
-        }
-
-        [Fact()]
-        public void TestPacket()
-        {
-            var packet = new TestPacket() { UserId = "test" };
-
-            var serializedPacket = this.packetSerializer.SerializePacket(packet);
             output.WriteLine(MessagePackSerializer.ConvertToJson(serializedPacket));
+
             Assert.NotNull(serializedPacket);
             Assert.NotEmpty(serializedPacket);
 
             var deserializedPacket = this.packetSerializer.DeserializePacket(serializedPacket);
-            var deserializedTypedPacket = deserializedPacket as TestPacket;
             Assert.NotNull(deserializedPacket);
+            var deserializedTypedPacket = deserializedPacket as Handshake;
             Assert.NotNull(deserializedTypedPacket);
 
             Assert.Equal(packet.UserId, deserializedTypedPacket.UserId);

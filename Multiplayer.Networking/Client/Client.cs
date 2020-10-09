@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MessagePack;
-using Multiplayer.Networking.Packet;
+
 using Multiplayer.Networking.Utility;
 using Multiplayer.Shared;
 using Telepathy;
+using Packets;
 
 namespace Multiplayer.Networking
 {
